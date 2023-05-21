@@ -6324,7 +6324,7 @@
 					cutups = cutupText(cutup_text);
 					shuffleCards();
 
-					selectSystem();
+					selectSystem(true);
 
 					countThemes();
 
@@ -6502,6 +6502,7 @@
 							<div id="sidebar">
 								<details id="system-details"><summary onclick="solo.showDescription(this, 'system-desc')">
 									<select name="system" id="system" onclick="event.stopPropagation()" onchange="solo.selectSystem(true)">
+										<option value="GUM">Flavored GUM</option>
 										<option value="Mythic">MYTHIC</option>
 										<option value="OPSE">ONE PAGE S.E.</option>
 										<option value="Motif">MOTIF</option>
@@ -6509,7 +6510,6 @@
 										<option value="Calypso">CALYPSO</option>
 										<option value="Libre">LIBRE</option>
 										<option value="IF">IF</option>
-										<option value="GUM">GUM</option>
 									</select>
 									</summary>
 									<div id="system-data"></div>
