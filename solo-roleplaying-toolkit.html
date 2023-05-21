@@ -1943,7 +1943,7 @@
 				}
 
 				var cypher = {
-					subtle: ["Analeptic",
+					"Subtle": ["Analeptic",
 							"Best tool",
 							"Burst of speed",
 							"Condition remover, medicine|addiction|autoimmune disease|bacterial infection|bad breath|blisters|bloating|cancer|chapped lips|flatus|heartburn|hiccups|ingrown hair|insomnia|joint pain|muscle cramp|pimples|psychosis|stiff neck|viral infection|hangover",
@@ -1976,7 +1976,7 @@
 							"Strength boost",
 							"Strength enhancer",
 							"Tissue regeneration"],
-					"gadget": ["Adhesion, climbing claws, gecko suit",
+					"Gadget": ["Adhesion, climbing claws, gecko suit",
 							"Antivenom",
 							"Armor reinforcer|light|medium|heavy|fireproof|coldproof|acidproof",
 							"Attractor, grappling claw",
@@ -2021,7 +2021,7 @@
 							"Ray emitter (mind disrupting)",
 							"Remote viewer, spy camera",
 							"Repair unit, toolkit",
-							"Repeater, autofire mod,
+							"Repeater, autofire mod",
 							"Shock attack",
 							"Shocker",
 							"Sleep inducer",
@@ -2036,7 +2036,7 @@
 							"Weapon enhancement|assisted aim|electric|cold|poison|acid|fire|sonic|psychic|knockback|glue|exploding|lethal",
 							"Wings, gliding suit",
 							"X-ray viewer"],
-					"magic": ["Age taker, rejuvenation",
+					"Magic": ["Age taker, rejuvenation",
 							"Banishing, teleporting strike",
 							"Blinking, random defensive teleport when struck",
 							"Chemical factory|euphoric|hallucinogenic|stimulant|depressant|nutritive|antivenom|medecine|darksight|strength boost|speed boost|wits boost|strength boost|speed boost|wits boost",
@@ -5845,6 +5845,37 @@
 						)
 					);
 				};
+				
+				var showCypher = function(what) {
+				    var item = "";
+					if (what === "Subtle") {
+						item = randomItem(cypher["Subtle"]);
+					} else if (what === "Power boost") {
+						item = randomItem(cypher["Power boost"]);
+					} else if (what === "Gadget") {
+						item = randomItem(cypher["Subtle"].concat(cypher["Gadget"]));
+					} else if (what === "Manifest") {
+						item = randomItem(cypher["Subtle"].concat(cypher["Gadget"]).concat(cypher["Magic"]));
+					};
+					var out = item;
+					if (item.indexOf('|') > 0) {
+						var variants = item.split('|');
+						var pick = random(1, variants.length - 1);
+						out = variants[0] + " - " + variants[pick];
+					}
+					display(out);
+				}
+
+				var showCypherList = function() {
+					display(
+						getLinks(
+							["Subtle", "solo.showCypher('Subtle')"],
+							["Gadgets", "solo.showCypher('Gadget')"],
+							["Manifest", "solo.showCypher('Manifest')"],
+							["Power boost", "solo.showCypher('Power boost')"]
+						)
+					)
+				};
 
 
 				///////////////////////////////////////////////////////////////////
@@ -6197,6 +6228,8 @@
 				solo.showCutup = showCutup;
 				solo.showTarot = showTarot;
 				solo.showTarotList = showTarotList;
+				solo.showCypher = showCypher;
+				solo.showCypherList = showCypherList;
 
 				// events
 				solo.showEvent = showEvent;
@@ -6514,6 +6547,7 @@
 									<p><a onclick="solo.showMotifList()">Motifs</a></p>
 									<p><a onclick="solo.showCutup()">Cut Up</a></p>
 									<p><a onclick="solo.showTarotList()">Tarot Reading</a></p>
+									<p><a onclick="solo.showCypherList()">Cyphers</a></p>
 								</details>
 								<hr>
 
@@ -6927,6 +6961,9 @@
 					<br>
 					<details><summary><b>Tarot Reading</b></summary>
 						<p>Similar to Motifs, tarot cards can be used to generate a feeling which you can apply to the context of the situation to get an answer to a question rather than something more concrete like a word generator.</p>
+					</details>
+					<details><summary><b>Cyphers</b></summary>
+						<p>Random single-use artifacts from the game Cypher System.</p>
 					</details>
 				</details>
 			</div>
@@ -7725,6 +7762,7 @@
 					<li><i>Scarlet Heroes</i> by Kevin Crawford</li>
 					<li><i>We Lost, But Gained</i> by Solo RPG Voyager</li>
 					<li><i>Game Unfolding Machine</i> by Jeansen Vaars</li>
+					<li><i>Cypher System</i> by Monte Cook</li>
 				</ul>
 				
 				<p>The following provide content for the muse meaning tables:</p>
