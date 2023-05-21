@@ -4868,8 +4868,17 @@
 				// ANCHOR Show GUM functions
 				/* GUM menu */
 				var showGUMOracle = function(who) {
-					var output = randomItem(gum["oracle"][who])
-					display("<p><b>" + getLink(who, "solo.showGUMOracle('" + who + "')") + "</b> " + output + "</p>");
+					var oracle = randomItem(gum["oracle"][who])
+					var output = "<p><b>" + getLink(who, "solo.showGUMOracle('" + who + "')") + "</b> " + oracle + "</p>";
+					const aspects = ["Favorability", "Danger", "Drama"];
+					for (let i = 0; i < aspects.length; i++) {
+						var k = aspects[i].split(" ")[0];
+						var d = random(1,6);
+						var o = engines["story"]["flavor"][k][d];
+						output += "<p><details><summary>" + aspects[i] + "</summary>" + o + "</details></p>";
+					}
+
+					display(output);
 				};
 
 				var showGUMGrandOracle = function() {
